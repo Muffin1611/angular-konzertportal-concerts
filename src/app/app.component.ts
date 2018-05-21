@@ -4,6 +4,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { Concert } from './concert';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +15,7 @@ export class AppComponent implements OnInit {
 
   private concertsUrl = './assets/concerts.json';
 
-  concerts : string [];
+  concerts : Concert [];
 
   constructor (private httpService: HttpClient) {}
 
@@ -21,7 +23,7 @@ export class AppComponent implements OnInit {
     this.httpService.get(this.concertsUrl)
       .subscribe(
       data => {
-        this.concerts = data["concerts"] as string [];
+        this.concerts = data["concerts"] as Concert [];
           console.log(this.concerts[1]);
       },
       (err: HttpErrorResponse) => {
